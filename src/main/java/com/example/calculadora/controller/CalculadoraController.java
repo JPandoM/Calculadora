@@ -1,6 +1,8 @@
 package com.example.calculadora.controller;
 
+import com.example.calculadora.model.OperacionResponseDTO;
 import com.example.calculadora.service.CalculadoraService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,12 +16,12 @@ public class CalculadoraController {
     }
 
     @GetMapping("/suma")
-    public int suma(@RequestParam int a, @RequestParam int b) {
-        return calculadoraService.suma(a, b);
+    public ResponseEntity<OperacionResponseDTO> suma(@RequestParam int a, @RequestParam int b) {
+        return ResponseEntity.ok(calculadoraService.suma(a, b));
     }
 
     @GetMapping("/resta")
-    public int resta(@RequestParam int a, @RequestParam int b) {
-        return calculadoraService.resta(a, b);
+    public ResponseEntity<OperacionResponseDTO> resta(@RequestParam int a, @RequestParam int b) {
+        return ResponseEntity.ok(calculadoraService.resta(a, b));
     }
 }
