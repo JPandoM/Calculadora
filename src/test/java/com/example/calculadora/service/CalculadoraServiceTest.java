@@ -12,7 +12,7 @@ class CalculadoraServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new CalculadoraService(); // no separate tracer needed
+        service = new CalculadoraService();
     }
 
     @Test
