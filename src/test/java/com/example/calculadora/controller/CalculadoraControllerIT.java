@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,5 +32,19 @@ class CalculadoraControllerIT {
         assertEquals(10, response.a());
         assertEquals(4, response.b());
         assertEquals(6, response.resultado());
+    }
+
+    @Test
+    void testSumaOverflow() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/suma?a=" + Integer.MAX_VALUE + "&b=1", String.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Suma produce overflow", response.getBody());
+    }
+
+    @Test
+    void testRestaOverflow() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/api/resta?a=" + Integer.MIN_VALUE + "&b=1", String.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals("Resta produce overflow", response.getBody());
     }
 }

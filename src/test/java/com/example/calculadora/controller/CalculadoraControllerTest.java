@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 class CalculadoraControllerTest {
@@ -62,4 +63,29 @@ class CalculadoraControllerTest {
         assertEquals(4, response.getBody().b());
         assertEquals(6, response.getBody().resultado());
     }
+
+    @Test
+    void testSumaOverflow() {
+        doThrow(new IllegalArgumentException("Suma produce overflow"))
+                .when(calculadoraService).suma(Integer.MAX_VALUE, 1);
+
+        try {
+            controller.suma(Integer.MAX_VALUE, 1);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Suma produce overflow", e.getMessage());
+        }
+    }
+
+    @Test
+    void testRestaOverflow() {
+        doThrow(new IllegalArgumentException("Resta produce overflow"))
+                .when(calculadoraService).resta(Integer.MIN_VALUE, 1);
+
+        try {
+            controller.resta(Integer.MIN_VALUE, 1);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Resta produce overflow", e.getMessage());
+        }
+    }
+
 }

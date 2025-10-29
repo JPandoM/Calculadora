@@ -10,14 +10,24 @@ public class CalculadoraService {
     private final TracerImpl tracer = new TracerImpl();
 
     public OperacionResponseDTO suma(int a, int b) {
-        int resultado = a + b;
-        tracer.trace(resultado);
-        return new OperacionResponseDTO("suma", a, b, resultado);
+        try {
+            int resultado = Math.addExact(a, b);
+            tracer.trace(resultado);
+            return new OperacionResponseDTO("suma", a, b, resultado);
+        } catch (ArithmeticException e) {
+            tracer.trace("Overflow en suma: " + e.getMessage());
+            throw new IllegalArgumentException("Suma produce overflow", e);
+        }
     }
 
     public OperacionResponseDTO resta(int a, int b) {
-        int resultado = a - b;
-        tracer.trace(resultado);
-        return new OperacionResponseDTO("resta", a, b, resultado);
+        try {
+            int resultado = Math.subtractExact(a, b);
+            tracer.trace(resultado);
+            return new OperacionResponseDTO("resta", a, b, resultado);
+        } catch (ArithmeticException e) {
+            tracer.trace("Overflow en resta: " + e.getMessage());
+            throw new IllegalArgumentException("Resta produce overflow", e);
+        }
     }
 }

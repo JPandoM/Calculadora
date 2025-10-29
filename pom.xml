@@ -12,7 +12,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>org.example</groupId>
+    <groupId>com.example</groupId>
     <artifactId>calculadora</artifactId>
     <version>1.0.0</version>
 

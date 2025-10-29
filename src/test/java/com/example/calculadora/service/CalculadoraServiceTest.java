@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculadoraServiceTest {
 
@@ -31,5 +32,15 @@ class CalculadoraServiceTest {
         assertEquals(10, result.a());
         assertEquals(4, result.b());
         assertEquals(6, result.resultado());
+    }
+
+    @Test
+    void testSumaOverflow() {
+        assertThrows(IllegalArgumentException.class, () -> service.suma(Integer.MAX_VALUE, 1));
+    }
+
+    @Test
+    void testRestaOverflow() {
+        assertThrows(IllegalArgumentException.class, () -> service.resta(Integer.MIN_VALUE, 1));
     }
 }
