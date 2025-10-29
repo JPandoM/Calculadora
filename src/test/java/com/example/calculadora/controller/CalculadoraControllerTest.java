@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-class CalculadoraControllerUnitTest {
+class CalculadoraControllerTest {
 
     @Mock
     private CalculadoraService calculadoraService;
@@ -24,7 +24,7 @@ class CalculadoraControllerUnitTest {
 
     private final AutoCloseable mocks;
 
-    public CalculadoraControllerUnitTest() {
+    public CalculadoraControllerTest() {
         mocks = MockitoAnnotations.openMocks(this);
     }
 

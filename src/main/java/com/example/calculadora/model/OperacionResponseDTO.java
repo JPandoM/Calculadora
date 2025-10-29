@@ -5,4 +5,5 @@ public record OperacionResponseDTO(
         int a,
         int b,
         int resultado
-) {}
+) {
+}
