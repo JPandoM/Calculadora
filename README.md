@@ -28,18 +28,21 @@ Solución
 - Opcional: Postman para probar la API
 ## Compilación y Ejecución
 1. Abre una terminal en el directorio raíz del proyecto.
-2. Ejecuta Maven package:
-
+2. Asegúrate de que el archivo `tracer-1.0.0.jar` está en el directorio `tracer/`.
+3. Use el siguiente comando para instalar el jar en tu repositorio local de Maven:
+```bash
+mvn install:install-file -Dfile="tracer/tracer-1.0.0.jar" -DgroupId="io.corp.calculator" -DartifactId="tracer" -Dversion="1.0.0" -Dpackaging="jar"
+```
+4. Esto generará el archivo jar en target/calculadora-1.0.0.jar.
 ```bash
 mvn clean package
 ```
-3. Esto generará el archivo jar en target/calculadora-1.0.0.jar.
-4. Ejecuta el jar:
+5. Ejecuta el jar:
 
 ```bash
 java -jar target/calculadora-1.0.0.jar
 ```
-5. El servicio estará disponible en `http://localhost:8080`.
+6. El servicio estará disponible en `http://localhost:8080`.
 ## Uso de la API
 - **Suma:**
   - Endpoint: `GET /api/suma?a={num1}&b={num2}`
